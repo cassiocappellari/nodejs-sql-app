@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('addresses', { 
+    await queryInterface.createTable('user_techs', { 
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -16,17 +16,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      zipcode: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      street: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      number: {
+      tech_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {model: 'techs', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         type: Sequelize.DATE,
@@ -40,6 +35,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('addresses')
+    await queryInterface.dropTable('user_techs')
   }
 }
